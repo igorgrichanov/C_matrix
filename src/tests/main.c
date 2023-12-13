@@ -18,6 +18,7 @@ void run_tests() {
   //       NULL};
   Suite *test_cases[] = {s21_create_matrix_suite(), s21_remove_matrix_suite(), s21_eq_matrix_suite(),
   s21_sum_matrix_suite(), s21_sub_matrix_suite(), s21_mult_number_suite(), s21_mult_matrix_suite(),
+  s21_transpose_suite(),
    NULL};
   for (Suite **current_testcase = test_cases; *current_testcase != NULL;
        current_testcase++) {
@@ -27,9 +28,4 @@ void run_tests() {
 
 int main() {
   run_tests();
-  
-  // matrix_t result = {NULL, 0, 0};
-  // int err = s21_create_matrix(0, 2, &result);
-  // printf("%d\n", err);
-  // return 0;
 }
