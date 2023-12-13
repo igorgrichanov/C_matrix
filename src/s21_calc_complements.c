@@ -5,13 +5,16 @@ int s21_calc_complements(matrix_t *A, matrix_t *result) {
   else if (is_matrix_not_square(A)) return CALC_ERROR;
   int err = s21_create_matrix(A->rows, A->columns, result);
   if (!err) {
-    for (int i = 0; i < A->rows; i++) {
-      for (int j = 0; j < A->columns; j++) {
-        double minor = 0.0;
-        err = s21_minor(A, i, j, &minor);
-        if (!err) result->matrix[i][j] = minor;
+    if (A->rows > 1) {
+      for (int i = 0; i < A->rows; i++) {
+        for (int j = 0; j < A->columns; j++) {
+          double minor = 0.0;
+          err = s21_minor(A, i, j, &minor);
+          if (!err) result->matrix[i][j] = minor;
+        }
       }
-    }
+    } else result->matrix[0][0] = A->matrix[0][0];
+    
   }
   if (!err) {
     for (int i = 0; i < result->rows; i++) {
@@ -38,7 +41,7 @@ int s21_minor(matrix_t *A, int row, int col, double *result) {
       row_counter++;
       col_counter = 0;
     }
-    err = s21_determinant(&temp, result); // HERE
+    err = s21_determinant(&temp, result);
   }
   return err;
 }

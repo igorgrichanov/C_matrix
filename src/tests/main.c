@@ -10,16 +10,12 @@ void run_testcase(Suite *testcase) {
 }
 
 void run_tests() {
-  // Suite *test_cases[] = {
-  //   s21_calc_complements_suite(), s21_create_matrix_suite(), s21_determinant_suite(),
-  //   s21_eq_matrix_suite(), s21_inverse_matrix_suite(), s21_mult_matrix_suite(),
-  //   s21_mult_number_suite(), s21_remove_matrix_suite(), s21_sub_matrix_suite(), 
-  //   s21_sum_matrix_suite(), s21_transpose_suite(),
-  //       NULL};
-  Suite *test_cases[] = {s21_create_matrix_suite(), s21_remove_matrix_suite(), s21_eq_matrix_suite(),
-  s21_sum_matrix_suite(), s21_sub_matrix_suite(), s21_mult_number_suite(), s21_mult_matrix_suite(),
-  s21_transpose_suite(), s21_calc_complements_suite(), s21_determinant_suite(),
-   NULL};
+  Suite *test_cases[] = {
+    s21_calc_complements_suite(), s21_create_matrix_suite(), s21_determinant_suite(),
+    s21_eq_matrix_suite(), s21_inverse_matrix_suite(), s21_mult_matrix_suite(),
+    s21_mult_number_suite(), s21_remove_matrix_suite(), s21_sub_matrix_suite(), 
+    s21_sum_matrix_suite(), s21_transpose_suite(),
+        NULL};
   for (Suite **current_testcase = test_cases; *current_testcase != NULL;
        current_testcase++) {
     run_testcase(*current_testcase);
