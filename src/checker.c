@@ -12,3 +12,9 @@ int not_same_size(matrix_t *A, matrix_t *B) {
   if ((A->columns != B->columns) || (A->rows != B->rows)) err = INCORRECT_MATRIX;
   return err;
 }
+
+int is_matrix_not_square(matrix_t *A) {
+  int err = OK;
+  if (A->columns != A->rows) err = INCORRECT_MATRIX;
+  return err;
+}

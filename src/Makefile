@@ -2,8 +2,8 @@ CC=gcc -std=c11
 CFLAGS=-Wall -Wextra -Werror
 FLAG_COV=--coverage
 
-SOURCES=s21_create_matrix.c s21_remove_matrix.c s21_eq_matrix.c s21_sum_matrix.c s21_sub_matrix.c s21_mult_number.c s21_mult_matrix.c s21_transpose.c checker.c
-FUNC_TESTS_C=tests/s21_create_matrix_test.c tests/s21_remove_matrix_test.c tests/s21_eq_matrix_test.c tests/s21_sum_matrix_test.c tests/s21_sub_matrix_test.c tests/s21_mult_number_test.c tests/s21_mult_matrix_test.c tests/s21_transpose_test.c
+SOURCES=s21_create_matrix.c s21_remove_matrix.c s21_eq_matrix.c s21_sum_matrix.c s21_sub_matrix.c s21_mult_number.c s21_mult_matrix.c s21_transpose.c s21_calc_complements.c s21_determinant.c checker.c
+FUNC_TESTS_C=tests/s21_create_matrix_test.c tests/s21_remove_matrix_test.c tests/s21_eq_matrix_test.c tests/s21_sum_matrix_test.c tests/s21_sub_matrix_test.c tests/s21_mult_number_test.c tests/s21_mult_matrix_test.c tests/s21_transpose_test.c tests/s21_calc_complements_test.c tests/s21_determinant_test.c
 
 OS=$(shell uname -s)
 

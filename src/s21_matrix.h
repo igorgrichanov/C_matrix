@@ -34,5 +34,7 @@ int s21_inverse_matrix(matrix_t *A, matrix_t *result);
 
 int check_correctness(matrix_t *A, matrix_t *B);
 int not_same_size(matrix_t *A, matrix_t *B);
+int is_matrix_not_square(matrix_t *A);
+int s21_minor(matrix_t *A, int i, int j, double *result);
 
 #endif
