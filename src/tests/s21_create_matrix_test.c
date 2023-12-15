@@ -78,6 +78,20 @@ START_TEST(create_matrix_test_10) {
 }
 END_TEST
 
+START_TEST(create_matrix_test_11) {
+  matrix_t result;
+  ck_assert_int_eq(s21_create_matrix(5, 5, &result), OK);
+  ck_assert_int_eq(result.rows, 5);
+  s21_remove_matrix(&result);
+}
+END_TEST
+
+START_TEST(create_matrix_test_12) {
+  matrix_t result;
+  ck_assert_int_eq(s21_create_matrix(5, 0, &result), INCORRECT_MATRIX);
+}
+END_TEST
+
 Suite *s21_create_matrix_suite() {
   Suite *s;
   TCase *tc;
@@ -95,6 +109,8 @@ Suite *s21_create_matrix_suite() {
   tcase_add_test(tc, create_matrix_test_8);
   tcase_add_test(tc, create_matrix_test_9);
   tcase_add_test(tc, create_matrix_test_10);
+  tcase_add_test(tc, create_matrix_test_11);
+  tcase_add_test(tc, create_matrix_test_12);
 
   suite_add_tcase(s, tc);
 
