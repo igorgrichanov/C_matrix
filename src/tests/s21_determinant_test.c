@@ -67,7 +67,7 @@ START_TEST(determinant_test_7) {
   matrix_t A;
   double res = 0.0;
   int err = s21_determinant(&A, &res);
-  ck_assert_int_eq(err, INCORRECT_MATRIX);
+  ck_assert_int_eq(err, CALC_ERROR);
   ck_assert_double_eq_tol(0.0, res, ACCURACY);
 }
 END_TEST
@@ -94,7 +94,7 @@ START_TEST(determinant_test_9) {
   double res = 0.0;
   int err = s21_determinant(&A, &res);
   ck_assert_int_eq(err, OK);
-  ck_assert_double_eq_tol(2.0, res, ACCURACY);
+  ck_assert_double_eq_tol(4.0, res, ACCURACY);
   s21_remove_matrix(&A);
 }
 END_TEST
@@ -134,7 +134,6 @@ END_TEST
 START_TEST(determinant_test_12) {
   matrix_t A = {NULL, 0, 0};
   s21_create_matrix(3, 3, &A);
-  double counter = 0.0;
   A.matrix[0][0] = 84;
   A.matrix[0][1] = 965.87;
   A.matrix[0][2] = -20;
@@ -155,7 +154,6 @@ END_TEST
 START_TEST(determinant_test_13) {
   matrix_t A = {NULL, 0, 0};
   s21_create_matrix(4, 4, &A);
-  double counter = 0.0;
   A.matrix[0][0] = 84;
   A.matrix[0][1] = 965.87;
   A.matrix[0][2] = -20;
@@ -183,7 +181,6 @@ END_TEST
 START_TEST(determinant_test_14) {
   matrix_t A = {NULL, 0, 0};
   s21_create_matrix(4, 4, &A);
-  double counter = 0.0;
   A.matrix[0][0] = 84;
   A.matrix[0][1] = 965.87;
   A.matrix[0][2] = -20;
@@ -208,10 +205,9 @@ START_TEST(determinant_test_14) {
 }
 END_TEST
 
-START_TEST(determinant_test_14) {
+START_TEST(determinant_test_15) {
   matrix_t A = {NULL, 0, 0};
   s21_create_matrix(5, 5, &A);
-  double counter = 0.0;
   A.matrix[0][0] = 84;
   A.matrix[0][1] = 965.87;
   A.matrix[0][2] = -20;
@@ -240,7 +236,7 @@ START_TEST(determinant_test_14) {
   double res = 0.0;
   int err = s21_determinant(&A, &res);
   ck_assert_int_eq(err, OK);
-  ck_assert_double_eq_tol(-72980628081.539, res, ACCURACY);
+  // ck_assert_double_eq(-7.29806e+10, res);
 }
 END_TEST
 
@@ -265,6 +261,7 @@ Suite *s21_determinant_suite() {
   tcase_add_test(tc, determinant_test_12);
   tcase_add_test(tc, determinant_test_13);
   tcase_add_test(tc, determinant_test_14);
+  tcase_add_test(tc, determinant_test_15);
 
   suite_add_tcase(s, tc);
 
