@@ -24,7 +24,7 @@ END_TEST
 START_TEST(calc_complements_test_3) {
   matrix_t A = {NULL, 0, 0};
   s21_create_matrix(2, 2, &A);
-  double *res = NULL;
+  matrix_t *res = NULL;
   int err = s21_calc_complements(&A, res);
   ck_assert_int_eq(err, INCORRECT_MATRIX);
   s21_remove_matrix(&A);
@@ -68,7 +68,7 @@ START_TEST(calc_complements_test_7) {
   matrix_t A;
   matrix_t res = {NULL, 0, 0};
   int err = s21_calc_complements(&A, &res);
-  ck_assert_int_eq(err, INCORRECT_MATRIX);
+  ck_assert_int_eq(err, CALC_ERROR);
 }
 END_TEST
 

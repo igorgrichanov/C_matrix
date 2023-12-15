@@ -23,5 +23,11 @@ void run_tests() {
 }
 
 int main() {
+  // matrix_t A = {NULL, 0, 0};
+  // s21_create_matrix(2, 3, &A);
+  // matrix_t *result = NULL;
+  // int err = s21_inverse_matrix(&A, result);
+  // ck_assert_int_eq(INCORRECT_MATRIX, err);
+  // s21_remove_matrix(&A);
   run_tests();
 }
