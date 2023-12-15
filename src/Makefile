@@ -1,8 +1,7 @@
 CC=gcc -std=c11
 CFLAGS=-Wall -Wextra -Werror
 FLAG_COV=--coverage
-
-SOURCES=*.c
+VALGRIND_FLAGS=--tool=memcheck --track-origins=yes
 FUNC_TESTS_C=tests/*_test.c
 
 OS=$(shell uname -s)
@@ -15,13 +14,13 @@ endif
 
 all: s21_decimal.a
 
-s21_matrix.a:
-	$(CC) $(CFLAGS) -c $(SOURCES)
+s21_matrix.a: *.c
+	$(CC) $(CFLAGS) -c $^
 	ar rc $@ *.o
 	ranlib $@
 
-test: s21_matrix.a
-	$(CC) $(CFLAGS) -o s21_matrix tests/main.c $(FUNC_TESTS_C) $(SOURCES) $(FLAG_COV) $(TEST_LIBS)
+test: *.c
+	$(CC) $(CFLAGS) -o s21_matrix tests/main.c $(FUNC_TESTS_C) $^ $(FLAG_COV) $(TEST_LIBS)
 	./s21_matrix
 
 gcov_report: test
@@ -35,6 +34,14 @@ format:
 	@clang-format -i *.c *.h tests/*.c tests/*.h
 	@clang-format -n *.c *.h tests/*.c tests/*.h
 	@rm .clang-format
+
+gcov_macos:
+	curl -fsSL https://rawgit.com/kube/42homebrew/master/install.sh | zsh
+	brew install lcov
+
+valgrind: clean
+	$(CC) $(CFLAGS) -o s21_matrix tests/main.c $(FUNC_TESTS_C) -g -O0 *.c $(TEST_LIBS)
+	valgrind $(VALGRIND_FLAGS) ./s21_matrix
 
 clean:
 	rm -rf gcov_report/
