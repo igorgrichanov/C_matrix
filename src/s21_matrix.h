@@ -14,6 +14,8 @@
 #define MIN_ROWS 1
 #define MIN_COLUMNS 1
 
+#define ACCURACY 1E-7
+
 typedef struct matrix_struct {
     double** matrix;
     int rows;

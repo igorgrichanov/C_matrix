@@ -42,6 +42,7 @@ int s21_minor(matrix_t *A, int row, int col, double *result) {
       col_counter = 0;
     }
     err = s21_determinant(&temp, result);
+    s21_remove_matrix(&temp);
   }
   return err;
 }

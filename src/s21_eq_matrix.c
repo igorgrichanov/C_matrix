@@ -6,7 +6,7 @@ int s21_eq_matrix(matrix_t *A, matrix_t *B) {
   int err = SUCCESS;
   for (int i = 0; i < A->rows; i++) {
     for (int j = 0; j < A->columns; j++) {
-      if (fabs(fabs(A->matrix[i][j]) - fabs(B->matrix[i][j])) > 1e-7) err = FAILURE;
+      if (fabs(fabs(A->matrix[i][j]) - fabs(B->matrix[i][j])) > ACCURACY) err = FAILURE;
     }
   }
   return err;
