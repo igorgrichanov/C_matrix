@@ -1,5 +1,6 @@
-#include "s21_matrix_suites.h"
 #include <stdio.h>
+
+#include "matrix_suites.h"
 
 void run_testcase(Suite *testcase) {
   SRunner *sr = srunner_create(testcase);
@@ -10,26 +11,15 @@ void run_testcase(Suite *testcase) {
 }
 
 void run_tests() {
-  // Suite *test_cases[] = {
-  //   s21_calc_complements_suite(), s21_create_matrix_suite(), s21_determinant_suite(),
-  //   s21_eq_matrix_suite(), s21_inverse_matrix_suite(), s21_mult_matrix_suite(),
-  //   s21_mult_number_suite(), s21_remove_matrix_suite(), s21_sub_matrix_suite(), 
-  //   s21_sum_matrix_suite(), s21_transpose_suite(),
-  //       NULL};
-  Suite *test_cases[] = {s21_create_matrix_suite(), s21_remove_matrix_suite(), s21_eq_matrix_suite(),
-  s21_sum_matrix_suite(), s21_sub_matrix_suite(), s21_mult_number_suite(), s21_mult_matrix_suite(),
-   NULL};
+  Suite *test_cases[] = {
+      calc_complements_suite(), create_matrix_suite(),  determinant_suite(),
+      eq_matrix_suite(),        inverse_matrix_suite(), mult_matrix_suite(),
+      mult_number_suite(),      remove_matrix_suite(),  sub_matrix_suite(),
+      sum_matrix_suite(),       transpose_suite(),      NULL};
   for (Suite **current_testcase = test_cases; *current_testcase != NULL;
        current_testcase++) {
     run_testcase(*current_testcase);
   }
 }
 
-int main() {
-  run_tests();
-  
-  // matrix_t result = {NULL, 0, 0};
-  // int err = s21_create_matrix(0, 2, &result);
-  // printf("%d\n", err);
-  // return 0;
-}
+int main() { run_tests(); }
