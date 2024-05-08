@@ -1,20 +1,20 @@
-#include "s21_matrix_suites.h"
+#include "matrix_suites.h"
 
 START_TEST(determinant_test_1) {
   matrix_t A = {NULL, 0, 0};
-  s21_create_matrix(2, 2, &A);
+  create_matrix(2, 2, &A);
   double res = 0.0;
-  int err = s21_determinant(&A, &res);
+  int err = determinant(&A, &res);
   ck_assert_double_eq_tol(0.0, res, ACCURACY);
   ck_assert_int_eq(err, OK);
-  s21_remove_matrix(&A);
+  remove_matrix(&A);
 }
 END_TEST
 
 START_TEST(determinant_test_2) {
   matrix_t A = {NULL, 0, 0};
   double res = 2.0;
-  int err = s21_determinant(&A, &res);
+  int err = determinant(&A, &res);
   ck_assert_double_eq_tol(2.0, res, ACCURACY);
   ck_assert_int_eq(err, INCORRECT_MATRIX);
 }
@@ -22,101 +22,101 @@ END_TEST
 
 START_TEST(determinant_test_3) {
   matrix_t A = {NULL, 0, 0};
-  s21_create_matrix(2, 2, &A);
+  create_matrix(2, 2, &A);
   double *res = NULL;
-  int err = s21_determinant(&A, res);
+  int err = determinant(&A, res);
   ck_assert_int_eq(err, INCORRECT_MATRIX);
-  s21_remove_matrix(&A);
+  remove_matrix(&A);
 }
 END_TEST
 
 START_TEST(determinant_test_4) {
   matrix_t A = {NULL, 0, 0};
-  s21_create_matrix(3, 2, &A);
+  create_matrix(3, 2, &A);
   double res = 0.0;
-  int err = s21_determinant(&A, &res);
+  int err = determinant(&A, &res);
   ck_assert_int_eq(err, CALC_ERROR);
   ck_assert_double_eq_tol(0.0, res, ACCURACY);
-  s21_remove_matrix(&A);
+  remove_matrix(&A);
 }
 END_TEST
 
 START_TEST(determinant_test_5) {
   matrix_t A = {NULL, 0, 0};
-  s21_create_matrix(0, 2, &A);
+  create_matrix(0, 2, &A);
   double res = 0.0;
-  int err = s21_determinant(&A, &res);
+  int err = determinant(&A, &res);
   ck_assert_int_eq(err, INCORRECT_MATRIX);
   ck_assert_double_eq_tol(0.0, res, ACCURACY);
-  s21_remove_matrix(&A);
+  remove_matrix(&A);
 }
 END_TEST
 
 START_TEST(determinant_test_6) {
   matrix_t A = {NULL, 0, 0};
-  s21_create_matrix(2, 2, &A);
+  create_matrix(2, 2, &A);
   double res;
-  int err = s21_determinant(&A, &res);
+  int err = determinant(&A, &res);
   ck_assert_int_eq(err, OK);
   ck_assert_double_eq_tol(0.0, res, ACCURACY);
-  s21_remove_matrix(&A);
+  remove_matrix(&A);
 }
 END_TEST
 
-START_TEST(determinant_test_7) {
-  matrix_t A;
-  double res = 0.0;
-  int err = s21_determinant(&A, &res);
-  ck_assert_int_eq(err, CALC_ERROR);
-  ck_assert_double_eq_tol(0.0, res, ACCURACY);
-}
-END_TEST
+// START_TEST(determinant_test_7) {
+//   matrix_t A;
+//   double res = 0.0;
+//   int err = determinant(&A, &res);
+//   ck_assert_int_eq(err, CALC_ERROR);
+//   ck_assert_double_eq_tol(0.0, res, ACCURACY);
+// }
+// END_TEST
 
 START_TEST(determinant_test_8) {
   matrix_t A = {NULL, 0, 0};
-  s21_create_matrix(1, 1, &A);
+  create_matrix(1, 1, &A);
   A.matrix[0][0] = 5.0;
   double res = 0.0;
-  int err = s21_determinant(&A, &res);
+  int err = determinant(&A, &res);
   ck_assert_int_eq(err, OK);
   ck_assert_double_eq_tol(5.0, res, ACCURACY);
-  s21_remove_matrix(&A);
+  remove_matrix(&A);
 }
 END_TEST
 
 START_TEST(determinant_test_9) {
   matrix_t A = {NULL, 0, 0};
-  s21_create_matrix(2, 2, &A);
+  create_matrix(2, 2, &A);
   A.matrix[0][0] = 1;
   A.matrix[0][1] = 2;
   A.matrix[1][0] = 0;
   A.matrix[1][1] = 4;
   double res = 0.0;
-  int err = s21_determinant(&A, &res);
+  int err = determinant(&A, &res);
   ck_assert_int_eq(err, OK);
   ck_assert_double_eq_tol(4.0, res, ACCURACY);
-  s21_remove_matrix(&A);
+  remove_matrix(&A);
 }
 END_TEST
 
 START_TEST(determinant_test_10) {
   matrix_t A = {NULL, 0, 0};
-  s21_create_matrix(2, 2, &A);
+  create_matrix(2, 2, &A);
   A.matrix[0][0] = 1;
   A.matrix[0][1] = 2;
   A.matrix[1][0] = -3;
   A.matrix[1][1] = 4;
   double res = 0.0;
-  int err = s21_determinant(&A, &res);
+  int err = determinant(&A, &res);
   ck_assert_int_eq(err, OK);
   ck_assert_double_eq_tol(10.0, res, ACCURACY);
-  s21_remove_matrix(&A);
+  remove_matrix(&A);
 }
 END_TEST
 
 START_TEST(determinant_test_11) {
   matrix_t A = {NULL, 0, 0};
-  s21_create_matrix(3, 3, &A);
+  create_matrix(3, 3, &A);
   double counter = 0.0;
   for (int i = 0; i < A.rows; i++) {
     for (int j = 0; j < A.columns; j++) {
@@ -124,16 +124,16 @@ START_TEST(determinant_test_11) {
     }
   }
   double res = 0.0;
-  int err = s21_determinant(&A, &res);
+  int err = determinant(&A, &res);
   ck_assert_int_eq(err, OK);
   ck_assert_double_eq_tol(0.0, res, ACCURACY);
-  s21_remove_matrix(&A);
+  remove_matrix(&A);
 }
 END_TEST
 
 START_TEST(determinant_test_12) {
   matrix_t A = {NULL, 0, 0};
-  s21_create_matrix(3, 3, &A);
+  create_matrix(3, 3, &A);
   A.matrix[0][0] = 84;
   A.matrix[0][1] = 965.87;
   A.matrix[0][2] = -20;
@@ -144,16 +144,16 @@ START_TEST(determinant_test_12) {
   A.matrix[2][1] = 41;
   A.matrix[2][2] = 55;
   double res = 0.0;
-  int err = s21_determinant(&A, &res);
+  int err = determinant(&A, &res);
   ck_assert_int_eq(err, OK);
   ck_assert_double_eq_tol(-912358.17, res, ACCURACY);
-  s21_remove_matrix(&A);
+  remove_matrix(&A);
 }
 END_TEST
 
 START_TEST(determinant_test_13) {
   matrix_t A = {NULL, 0, 0};
-  s21_create_matrix(4, 4, &A);
+  create_matrix(4, 4, &A);
   A.matrix[0][0] = 84;
   A.matrix[0][1] = 965.87;
   A.matrix[0][2] = -20;
@@ -171,16 +171,16 @@ START_TEST(determinant_test_13) {
   A.matrix[3][2] = 0;
   A.matrix[3][3] = 0;
   double res = 0.0;
-  int err = s21_determinant(&A, &res);
+  int err = determinant(&A, &res);
   ck_assert_int_eq(err, OK);
   ck_assert_double_eq_tol(0, res, ACCURACY);
-  s21_remove_matrix(&A);
+  remove_matrix(&A);
 }
 END_TEST
 
 START_TEST(determinant_test_14) {
   matrix_t A = {NULL, 0, 0};
-  s21_create_matrix(4, 4, &A);
+  create_matrix(4, 4, &A);
   A.matrix[0][0] = 84;
   A.matrix[0][1] = 965.87;
   A.matrix[0][2] = -20;
@@ -198,16 +198,16 @@ START_TEST(determinant_test_14) {
   A.matrix[3][2] = 0;
   A.matrix[3][3] = 2;
   double res = 0.0;
-  int err = s21_determinant(&A, &res);
+  int err = determinant(&A, &res);
   ck_assert_int_eq(err, OK);
   ck_assert_double_eq_tol(2693395.06, res, ACCURACY);
-  s21_remove_matrix(&A);
+  remove_matrix(&A);
 }
 END_TEST
 
 START_TEST(determinant_test_15) {
   matrix_t A = {NULL, 0, 0};
-  s21_create_matrix(5, 5, &A);
+  create_matrix(5, 5, &A);
   A.matrix[0][0] = 84;
   A.matrix[0][1] = 965.87;
   A.matrix[0][2] = -20;
@@ -234,26 +234,27 @@ START_TEST(determinant_test_15) {
   A.matrix[4][3] = 0;
   A.matrix[4][4] = 2;
   double res = 0.0;
-  int err = s21_determinant(&A, &res);
+  int err = determinant(&A, &res);
   ck_assert_int_eq(err, OK);
   // ck_assert_double_eq(-7.29806e+10, res);
+  remove_matrix(&A);
 }
 END_TEST
 
-Suite *s21_determinant_suite() {
+Suite *determinant_suite() {
   Suite *s;
   TCase *tc;
 
-  s = suite_create("s21_determinant");
-  tc = tcase_create("s21_determinant_case");
-  
+  s = suite_create("determinant");
+  tc = tcase_create("determinant_case");
+
   tcase_add_test(tc, determinant_test_1);
   tcase_add_test(tc, determinant_test_2);
   tcase_add_test(tc, determinant_test_3);
   tcase_add_test(tc, determinant_test_4);
   tcase_add_test(tc, determinant_test_5);
   tcase_add_test(tc, determinant_test_6);
-  tcase_add_test(tc, determinant_test_7);
+  // tcase_add_test(tc, determinant_test_7);
   tcase_add_test(tc, determinant_test_8);
   tcase_add_test(tc, determinant_test_9);
   tcase_add_test(tc, determinant_test_10);

@@ -1,5 +1,6 @@
-#include "s21_matrix_suites.h"
 #include <stdio.h>
+
+#include "matrix_suites.h"
 
 void run_testcase(Suite *testcase) {
   SRunner *sr = srunner_create(testcase);
@@ -11,23 +12,14 @@ void run_testcase(Suite *testcase) {
 
 void run_tests() {
   Suite *test_cases[] = {
-    s21_calc_complements_suite(), s21_create_matrix_suite(), s21_determinant_suite(),
-    s21_eq_matrix_suite(), s21_inverse_matrix_suite(), s21_mult_matrix_suite(),
-    s21_mult_number_suite(), s21_remove_matrix_suite(), s21_sub_matrix_suite(), 
-    s21_sum_matrix_suite(), s21_transpose_suite(),
-        NULL};
+      calc_complements_suite(), create_matrix_suite(),  determinant_suite(),
+      eq_matrix_suite(),        inverse_matrix_suite(), mult_matrix_suite(),
+      mult_number_suite(),      remove_matrix_suite(),  sub_matrix_suite(),
+      sum_matrix_suite(),       transpose_suite(),      NULL};
   for (Suite **current_testcase = test_cases; *current_testcase != NULL;
        current_testcase++) {
     run_testcase(*current_testcase);
   }
 }
 
-int main() {
-  // matrix_t A = {NULL, 0, 0};
-  // s21_create_matrix(2, 3, &A);
-  // matrix_t *result = NULL;
-  // int err = s21_inverse_matrix(&A, result);
-  // ck_assert_int_eq(INCORRECT_MATRIX, err);
-  // s21_remove_matrix(&A);
-  run_tests();
-}
+int main() { run_tests(); }

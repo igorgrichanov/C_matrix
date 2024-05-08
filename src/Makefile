@@ -7,24 +7,24 @@ FUNC_TESTS_C=tests/*_test.c
 OS=$(shell uname -s)
 
 ifeq ($(OS),Linux)
-	TEST_LIBS =-lcheck -lsubunit -pthread -lrt -lm
+	TEST_LIBS=-lcheck -lsubunit -pthread -lrt -lm
 else
-	TEST_LIBS =-lcheck
+	TEST_LIBS=`pkg-config --cflags --libs check` -lm
 endif
 
-all: s21_decimal.a
+all: matrix.a
 
-s21_matrix.a: *.c
+matrix.a: *.c
 	$(CC) $(CFLAGS) -c $^
 	ar rc $@ *.o
 	ranlib $@
 
 test: *.c
-	$(CC) $(CFLAGS) -o s21_matrix tests/main.c $(FUNC_TESTS_C) $^ $(FLAG_COV) $(TEST_LIBS)
-	./s21_matrix
+	$(CC) $(CFLAGS) -o matrix tests/main.c $(FUNC_TESTS_C) $^ $(FLAG_COV) $(TEST_LIBS)
+	./matrix
 
 gcov_report: test
-	gcov ./s21_matrix
+	gcov ./matrix
 	lcov -c -d . -o gcov.info
 	genhtml gcov.info -o gcov_report
 	open gcov_report/index.html
@@ -35,18 +35,14 @@ format:
 	@clang-format -n *.c *.h tests/*.c tests/*.h
 	@rm .clang-format
 
-gcov_macos:
-	curl -fsSL https://rawgit.com/kube/42homebrew/master/install.sh | zsh
-	brew install lcov
-
 valgrind: clean
 	$(CC) $(CFLAGS) -o s21_matrix tests/main.c $(FUNC_TESTS_C) -g -O0 *.c $(TEST_LIBS)
-	valgrind $(VALGRIND_FLAGS) ./s21_matrix
+	valgrind $(VALGRIND_FLAGS) ./matrix
 
 clean:
 	rm -rf gcov_report/
 	rm -rf objects/
-	rm -f *.info s21_matrix
+	rm -f *.info matrix
 	rm -f *.gcda *.gcno *.gcov *.o *.a
 
 rebuild: clean all
